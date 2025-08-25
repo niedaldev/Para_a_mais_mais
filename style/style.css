@@ -1,0 +1,189 @@
+:root {
+    --primary: #fff;
+    --bg-color: rgb(5, 53, 61);
+    --bg-envelope-color: #f5edd1;
+    --envelope-tab: #ecdeb8;
+    --envelope-cover: #e6cfa7;
+    --shadown-color: rgba(0, 0, 0, 0.2);
+    --txt-color: #444;
+    --heart-color: rgb(252, 8, 231);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: url('../imagens/tulipazul.png') no-repeat center center fixed;
+    background-size: cover;
+    background-attachment: scroll;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: "Playwrite IN", cursive;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+.container {
+    height: 100vh;
+    display: grid;
+    place-items: center;
+}
+
+.container>.envelope-wrapper {
+    background: var(--bg-envelope-color);
+    box-shadow: 0 0 40px var(--shadown-color);
+}
+
+.container>.envelope-wrapper>.envelope {
+    position: relative;
+    width: 300px;
+    height: 230px;
+}
+
+.container>.envelope-wrapper>.envelope::before {
+    content: '';
+    position: absolute;
+    z-index: 2;
+    border-top: 130px solid var(--envelope-tab);
+    border-right: 150px solid transparent;
+    border-left: 150px solid transparent;
+    top: 0;
+    transform-origin: top;
+    transition: transform 0.5s ease-in-out 0.7s, z-index 0s linear 0.7s;
+}
+
+.container>.envelope-wrapper>.envelope::after {
+    content: '';
+    position: absolute;
+    z-index: 3;
+    border-top: 130px solid transparent;
+    border-left: 150px solid var(--envelope-cover);
+    border-right: 150px solid var(--envelope-cover);
+    border-bottom: 100px solid var(--envelope-cover);
+    bottom: 0;
+}
+
+.letter {
+    position: absolute;
+    right: 20%;
+    bottom: 0;
+    width: 54%;
+    height: 80%;
+    background: var(--primary);
+    transition: all 1s ease-in-out;
+    padding: 20px 10px;
+    box-shadow: 0 0 10px var(--shadown-color);
+    z-index: 1;
+}
+
+.letter>.text {
+    font-family: "Playwrite IN", cursive;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 10px;
+    color: var(--txt-color);
+    text-align: left;
+}
+
+/* --- Coração --- */
+.heart {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 15px;
+    height: 15px;
+    background: var(--heart-color);
+    z-index: 4;
+    transform: translate(-50%, -20%) rotate(45deg);
+    transition: transform 0.5s ease-in-out 1s, opacity 0.3s ease-in-out 1s;
+    box-shadow: 0 0 10px var(--shadown-color);
+    cursor: pointer;
+}
+
+.heart::before,
+.heart::after {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: var(--heart-color);
+    border-radius: 50%;
+}
+
+.heart::before {
+    top: -7.5px;
+}
+
+.heart::after {
+    right: 7.5px; /* positivo no PC */
+}
+
+/* --- Ajustes para celular --- */
+@media (max-width: 600px) {
+    .heart {
+        width: 25px;
+        height: 25px;
+        transform: translate(-50%, -20%) rotate(45deg); /* mantém em pé igual PC */
+    }
+    .heart::before,
+    .heart::after {
+        width: 25px;
+        height: 25px;
+    }
+    .heart::before {
+        top: -12.5px;
+    }
+    .heart::after {
+        right: 12.5px; /* CORRIGIDO: positivo igual PC */
+    }
+}
+
+
+/* Animação de abertura */
+.flap>.envelope::before {
+    transform: rotateX(180deg);
+    z-index: 0;
+    transition: transform 0.5s ease-in-out 0.7s, z-index 0s linear 0.7s;
+}
+
+.flap>.envelope .letter {
+    bottom: 100px;
+    transform: scale(1.5);
+    transition-delay: 1s;
+    z-index: 4;
+}
+
+.flap>.heart {
+    transform: rotate(90deg);
+    transition-delay: 0.4s;
+    opacity: 0;
+    z-index: 0;
+}
+
+.firefly {
+    position: fixed;
+    width: 5px;
+    height: 5px;
+    background: #f7ff00;
+    border-radius: 50%;
+    box-shadow: 0 0 10px 5px #f7ff00;
+    opacity: 0;
+    animation: blink 2s infinite, move 20s infinite;
+    pointer-events: none;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+}
+
+@keyframes move {
+    0% { transform: translate(0, 0); }
+    25% { transform: translate(calc(10vw * var(--random-x)), calc(10vh * var(--random-y))); }
+    50% { transform: translate(calc(10vw * var(--random-x)), calc(10vh * var(--random-y))); }
+    75% { transform: translate(calc(10vw * var(--random-x)), calc(10vh * var(--random-y))); }
+    100% { transform: translate(0, 0); }
+}

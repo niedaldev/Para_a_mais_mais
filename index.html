@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Aniversário Nic!!!</title>
+    <link rel="stylesheet" href="./style/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+IN:wght@100..400&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <div class="envelope-wrapper">
+            <div class="envelope">
+                <div class="letter">
+                    <div class="text">
+                        <strong>Parabéns Anne Nicolle!</strong>
+                        <p>
+                            Neste dia especial, quero te dizer o quanto você é importante para mim. Te amo demais e admiro muito a pessoa incrivel que você é. Desejo o melhor de Deus para sua vida. <br>Feliz Aniversário!
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="heart"></div>
+        </div>
+    </div>
+
+    <audio id="musica-preferida" src="./musica/golden_hour_piano.mp3" loop></audio>
+    <script>
+        const envelope = document.querySelector('.envelope-wrapper');
+        const musica = document.getElementById('musica-preferida');
+
+        envelope.addEventListener('click', () => {
+            envelope.classList.toggle('flap');
+
+            // Se estiver pausada, inicia do zero e toca
+            if (musica.paused) {
+                musica.currentTime = 0;
+                musica.play().catch(err => console.log("Erro ao tocar música:", err));
+            }
+        });
+    </script>
+
+
+    </script>
+    <script>
+        // Criar 30 vagalumes
+        for (let i = 0; i < 30; i++) {
+            let firefly = document.createElement("div");
+            firefly.classList.add("firefly");
+            document.body.appendChild(firefly);
+
+            // posição inicial aleatória
+            firefly.style.top = Math.random() * 100 + "vh";
+            firefly.style.left = Math.random() * 100 + "vw";
+
+            // delay e duração aleatórios
+            firefly.style.animationDelay = (Math.random() * 5) + "s";
+            firefly.style.animationDuration = (3 + Math.random() * 5) + "s";
+
+            //adicionar variavéis CSS para as animações de movimento
+            firefly.style.setProperty('--random-x', Math.random() * 2 - 1);
+            firefly.style.setProperty('--random-y', Math.random() * 2 - 1);
+        }
+    </script>
+
+
+</body>
+
+</html>
